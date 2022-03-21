@@ -162,8 +162,8 @@ class WeatherViewController: UIViewController {
                 self.apiToGetWeatherData(city: city, completion: {
                     (WeatherModel) in
                     self.weatherData = WeatherModel
-                    print(self.weatherData?.error?.message)
-                    if self.weatherData?.error?.message == "" {
+                    print(self.weatherData?.error?.message,"check")
+                    if self.weatherData?.error?.message == nil || self.weatherData?.error?.message == "" {
                         DispatchQueue.main.async {
                             self.tableSetup.delegate = self
                             self.tableSetup.dataSource = self
@@ -173,7 +173,7 @@ class WeatherViewController: UIViewController {
                         DispatchQueue.main.async {
                             self.showAlert(withTitle: self.weatherData?.error?.message ?? "API Error")
                         }
-                        
+
                     }
                     
                 })
@@ -240,7 +240,7 @@ extension WeatherViewController: UITextFieldDelegate {
             self.apiToGetWeatherData(city: city, completion: {
                 (WeatherModel) in
                 self.weatherData = WeatherModel
-                if self.weatherData?.error?.message == "" {
+                if self.weatherData?.error?.message == nil || self.weatherData?.error?.message == "" {
                     DispatchQueue.main.async {
                         self.tableSetup.reloadData()
                     }
